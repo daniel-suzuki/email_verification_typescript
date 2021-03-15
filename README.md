@@ -12,7 +12,7 @@ An email verification system built in TypeScript with the application of SOLID a
 - MongoDB
 
 # Sources:
-This projects was based on other sources:
+This project was based on multiple sources:
 1. https://github.com/rmanguinho/clean-ts-api/tree/master/src/main
 2. https://www.youtube.com/watch?v=7BNoxRntLYo&list=LL&index=1
 3. https://www.youtube.com/watch?v=vAV4Vy4jfkc
