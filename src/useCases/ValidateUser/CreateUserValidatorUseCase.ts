@@ -11,9 +11,7 @@ export class CreateUserValidatorUseCase{
     ){}
 
     async execute(data: ICreateUserValidatorRequestDTO){
-        console.log(data);
         const validatorExists = await this.userValidatorsRepository.findValidatorByValidationKey(data.key);
-        console.log(this.userValidatorsRepository);
         if(!validatorExists){
             throw new Error('Email not registered or another error might have occurred.');
         }
@@ -21,7 +19,9 @@ export class CreateUserValidatorUseCase{
         if(!user){
             throw new Error('User not found based on validator id.');
         }
-        this.usersRepository.validate(user);
+        await this.usersRepository.validate(user);
+        await this.userValidatorsRepository.delete(validatorExists);
+
         this.mailProvider.sendMail({
             to: {
                 name: user.name,

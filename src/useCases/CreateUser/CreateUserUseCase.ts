@@ -18,9 +18,7 @@ export class CreateUserUseCase{
             throw new Error('Email already registered.');
         }
         const user = new User(data);
-        console.log(user);
         const userValidator = new UserValidator(user);
-        console.log(userValidator);
         await this.usersRepository.save(user);
         await this.userValidatorsRepository.save(userValidator);
 
@@ -34,7 +32,7 @@ export class CreateUserUseCase{
                 email: "daniel.suzuki@gobrasa.org"
             },
             subject: "Verificação de Email",
-            body: `<p>Codigo de Verificação: <a href="http://localhost:3333/${userValidator.key}">${userValidator.key}</a></p>`
+            body: `<p>Codigo de Verificação: <a href="http://localhost:${process.env.PORT||5000}/${userValidator.key}">${userValidator.key}</a></p>`
         })
     }
 }
